@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
@@ -17,27 +18,26 @@ class SuggestionButton(Button):
 
 class PhonebookSearchApp(App):
     def build(self):
-        Window.clearcolor = (1, 1, 1, 1)
-        Window.size = (1080, 720)
+        Window.clearcolor = (0/255, 25/255, 51/255, 1)
+        Window.size = (360, 390)
         return PhonebookSearchLayout()
 
 
 class PhonebookSearchLayout(Widget):
     def on_enter(self, instance):
-        search_input = instance.text
+        search_input = (instance.text)
         instance.text = ""
 
         phone_number = self.interpolation_search(search_input)
 
         if phone_number is None:
             popup_content = Label(text="Name not found in phonebook")
-            popup = Popup(title='Search Result', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup = Popup(title='Search Result', content=popup_content, size_hint=(None, None), size=(300, 150))
             popup.open()
         else:
             popup_content = Label(text="Phone Number: " + phone_number)
-            popup = Popup(title='Search Result', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup = Popup(title='Search Result', content=popup_content, size_hint=(None, None), size=(300, 150))
             popup.open()
-
     def interpolation_search(self, search_input):
         phonebook = [
             {'name': 'daph', 'phone': '09079419021'},
@@ -77,11 +77,11 @@ class PhonebookSearchLayout(Widget):
 
     def get_matching_entries(self, text):
         phonebook = [
-            {'name': 'daph', 'phone': '09079419021'},
+            {'name': 'daph', 'phone': '09079362021'},
             {'name': 'denden', 'phone': '09123456734'},
-            {'name': 'jaypee', 'phone': '09298837811'},
-            {'name': 'jk', 'phone': '09876543210'},
-            {'name': 'sienna', 'phone': '09761709251'}
+            {'name': 'jaypee', 'phone': '09298808811'},
+            {'name': 'jk', 'phone': '09176543210'},
+            {'name': 'sienna', 'phone': '09761743251'}
         ]
 
         return [entry for entry in phonebook if entry['name'].startswith(text)]
@@ -89,6 +89,11 @@ class PhonebookSearchLayout(Widget):
     def fill_input(self, text):
         input_box = self.ids.input_box
         input_box.text = text
+
+    def set_focus(self):
+        input_box = self.ids.input_box
+        input_box.focus = True
+
 
 
 PhonebookSearchApp().run()
