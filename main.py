@@ -7,7 +7,17 @@ from kivy.uix.widget import Widget
 
 
 class MainWidget(Widget):
-    pass
+
+    def getInput(self, input_text):
+        inputs = input_text.split(",")
+        inputs = [value.strip() for value in inputs] #remove white spaces
+        inputs.sort()
+        print(inputs)
+
+    def on_enter(self):
+        input_text = self.ids.inputs.text
+        self.getInput(input_text)
+        self.ids.inputs.text = ""
 
 Builder.load_file('main.kv')
 class MyApp(App):
