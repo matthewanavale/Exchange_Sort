@@ -1,15 +1,23 @@
 
 
 <MainWidget>:
+    BoxLayout:
+        orientation: "vertical"
+
+        FloatLayout:
+            Label:
+                text: "INPUT THE NUMBER TO BE SEARCH"
+                pos: 180,170
+
+            TextInput:
+                id: inputs
+                size_hint: 1, None
+                height: "30dp"
+                multiline: False
+                pos: 180,150
+                on_text_validate: root.on_enter()
+
+<CustomPopup>:
+    orientation: "vertical"
     Label:
-        text: "INPUT THE NUMBER TO BE SEARCH"
-        pos: 500,450
-
-
-    TextInput:
-        id: inputs
-        pos: 400,400
-        size: 300,30
-        focus: True
-        multiline: False
-        on_text_validate: root.on_enter()
+        text: root.message
